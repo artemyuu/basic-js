@@ -1,24 +1,37 @@
 const chainMaker = {
-  getLength() {
-    throw 'Not implemented';
-    // remove line with error and write your code here
-  },
-  addLink(value) {
-    throw 'Not implemented';
-    // remove line with error and write your code here
-  },
-  removeLink(position) {
-    throw 'Not implemented';
-    // remove line with error and write your code here
-  },
-  reverseChain() {
-    throw 'Not implemented';
-    // remove line with error and write your code here
-  },
-  finishChain() {
-    throw 'Not implemented';
-    // remove line with error and write your code here
-  }
+    arr : [],
+    
+    getLength() {
+      return this.arr.length;
+    },
+    addLink(value) {
+      (value == undefined) ? this.arr.push(`()`) : this.arr.push(`(${value})`);
+      return this;
+    },
+    
+    removeLink(position) {
+       if (!isNaN(position) && position > 0 && position <= this.arr.length) {
+       this.arr.splice(position-1,1);
+       return this
+       }
+       else{
+           this.arr = [];
+           throw new Error();
+       }
+    },
+       
+    reverseChain() {
+      this.arr.reverse();
+      return this
+    },
+    finishChain() {
+      let result = "";
+      for (let val of this.arr){
+          result = `${result}${val}~~`;
+      }
+      this.arr = [];
+      return result.slice(0,-2);
+    }
 };
 
 module.exports = chainMaker;
